@@ -1,6 +1,6 @@
-name: "Nightly release notes"
+name: "Trigger a remote workflow"
 author: "1fexd"
-description: "Build release notes for nightly builds"
+description: "Trigger a remote workflow"
 
 runs:
   using: "node20"

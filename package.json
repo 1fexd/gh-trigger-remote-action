@@ -1,6 +1,6 @@
 {
   "name": "gh-trigger-remote-action",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "gh-trigger-remote-action",
   "main": "lib/main.js",
   "scripts": {
