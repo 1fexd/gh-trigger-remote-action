@@ -4176,34 +4176,29 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const core_1 = __nccwpck_require__(6762);
 const GITHUB_TOKEN = core.getInput("github-token") || process.env["GITHUB_TOKEN"];
-const OWNER = core.getInput("owner") || process.env["OWNER"];
 const REPO = core.getInput("repo") || process.env["REPO"];
 const EVENT_TYPE = core.getInput("event-type") || process.env["EVENT_TYPE"];
-function shortCommitSha(sha) {
-    return sha.substring(0, 7);
-}
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         if (!GITHUB_TOKEN) {
             core.error(`Input "GITHUB_TOKEN" not provided`);
             return;
         }
-        if (!OWNER) {
-            core.error(`Input "OWNER" not provided`);
-            return;
-        }
         if (!REPO) {
-            core.error(`Input "NIGHTLY_REPO" not provided`);
+            core.error(`Input "REPO" not provided`);
             return;
         }
         if (!EVENT_TYPE) {
             core.error(`Input "EVENT_TYPE" not provided`);
             return;
         }
+        const repoSplit = REPO.split("/");
+        const repoOwner = repoSplit[0];
+        const repoName = repoSplit[1];
         const octokit = new core_1.Octokit({ auth: GITHUB_TOKEN });
         const response = yield octokit.request("POST /repos/{owner}/{repo}/dispatches", {
-            owner: OWNER,
-            repo: REPO,
+            owner: repoOwner,
+            repo: repoName,
             event_type: EVENT_TYPE,
             client_payload: {
                 unit: false,
