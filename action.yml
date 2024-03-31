@@ -2,6 +2,14 @@ name: "Trigger a remote workflow"
 author: "1fexd"
 description: "Trigger a remote workflow"
 
+inputs:
+  github-token:
+    description: "Github token with repository permission"
+  repo:
+    description: "Repository formatted as 'user/repo'"
+  event-type:
+    description: "Event type to trigger"
+
 runs:
   using: "node20"
   main: "dist/index.js"
