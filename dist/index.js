@@ -4178,6 +4178,7 @@ const core_1 = __nccwpck_require__(6762);
 const GITHUB_TOKEN = core.getInput("github-token") || process.env["GITHUB_TOKEN"];
 const REPO = core.getInput("repo") || process.env["REPO"];
 const EVENT_TYPE = core.getInput("event-type") || process.env["EVENT_TYPE"];
+const REF = core.getInput("ref") || process.env["REF"];
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         if (!GITHUB_TOKEN) {
@@ -4192,6 +4193,10 @@ function run() {
             core.error(`Input "EVENT_TYPE" not provided`);
             return;
         }
+        if (!REF) {
+            core.error(`Input "REF" not provided`);
+            return;
+        }
         const repoSplit = REPO.split("/");
         const repoOwner = repoSplit[0];
         const repoName = repoSplit[1];
@@ -4202,7 +4207,8 @@ function run() {
             event_type: EVENT_TYPE,
             client_payload: {
                 unit: false,
-                integration: true
+                integration: true,
+                ref: REF
             },
             headers: {
                 "X-GitHub-Api-Version": "2022-11-28"
