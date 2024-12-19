@@ -9,6 +9,8 @@ inputs:
     description: "Repository formatted as 'user/repo'"
   event-type:
     description: "Event type to trigger"
+  ref:
+    description: "Ref to trigger event on"
 
 runs:
   using: "node20"
